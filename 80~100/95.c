@@ -1,8 +1,5 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <locale.h>
-#include <wchar.h>
 int str_len(char* s) {
     int i = 0;
     int sum = 0;
@@ -28,10 +25,13 @@ int str_eql(char* s1, char* s2) {
 char *jstr_reverse(char* s1) {
     int a = str_len(s1);
     int j = 0;
-    wchar_t *ans = (wchar_t *)malloc(sizeof(wchar_t) * 100);
-    for (int i = a-1; i>=0; i-=2) {
-        ans[j] = s1[i];
-        j++;
+    char *ans = (char *)malloc(sizeof(char) * 100);
+    //  日本語は半角の三つ分。
+    for (int i = a; i>0; i-=3) {
+        ans[j] = s1[i-3];
+        ans[j+1] = s1[i-2];
+        ans[j+2] = s1[i-1];
+        j+=3;
     }
     ans[j] = '\0';
     return ans;
@@ -42,9 +42,6 @@ int jstr_reverse_test(void) {
     str_eql(jstr_reverse(jstr_reverse("おはようございます。")), "おはようございます。");
 }
 int main() {
-    char s[] = "おはようございます。";
-    int a = str_len(s);
-    printf("%s\n",s);
-    printf("%s",jstr_reverse("おはようございます。"));
+    printf("%i",jstr_reverse_test());
     return 0;
 }

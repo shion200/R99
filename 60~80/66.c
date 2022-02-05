@@ -4,17 +4,9 @@ int my_rand(int n){
     return rand() % n;
 }
 
-int power(int n, int m){
-    int i,x;
-    x=1;
-    for(i=0;i<m;i++){
-        x=x*n;
-    }
-    return x;
-}
 //サイズｎの整数配列a[]に０～ｍ未満の乱数をセットする関数
-void init_randoms_n(int a[ ] , int n, int m){
-    for(int i = 0;i < n;i++){
+void init_randoms_n(int a[ ] , int n, int m) {
+    for (int i = 0;i < n;i++) {
         a[i] = my_rand(m);
     }
 }
@@ -26,15 +18,14 @@ int * shuffle(int n) {
     int x = 0;
     int *ans = NULL;
     ans = (int*)malloc(sizeof(int) * n);
-    // int ans[n];
     for (int i = 0; i <= n; i++) {
         a[i] = i;
         ans[i] = 0;
     }
     while (x < n) {
         init_randoms_n(b, n, n);
-        for (int j = 0; j<=n; j++) {
-            for (int k = 0; k<=n; k++) {
+        for (int j = 0; j<n; j++) {
+            for (int k = 0; k<n; k++) {
                 if (b[j] == a[k]) {
                     ans[x] = b[j];
                     a[k] = n+1;
@@ -43,9 +34,6 @@ int * shuffle(int n) {
             }   
         }
     }
-    // for (int s = 0; s<n; s++) {
-    //   printf("%daa\n",ans[s]);
-    // 
     return ans;
 }
 
@@ -78,6 +66,6 @@ int shuffle_test(void) {
 }
 
 int main() {
-    printf("%i",shuffle(10));
+    printf("%i",shuffle_test());
     return 0;
 }
