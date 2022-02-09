@@ -40,8 +40,9 @@ char *to_date(int n){
     char date[][12]={"January","February","March","April","May","June","July","August","September","October","November","Decenver"};
     printf("%s,%d",date[z],n-days[z]);
 }
+
 int p64(int n) {
-    int ans[2*n+1];
+    int s = 1;
     int b[n];
     int x = 0;
     int y = 0;
@@ -53,29 +54,20 @@ int p64(int n) {
     for (int i = 0;i < n; i++) {
         scanf("%d %d", &x, &y);
         b[i] = days(x,y);
-        // printf("%d\n",b[i]);
     }
 
     for (int k = 0; k < n; k++) {
-        // printf("K=%d\n",k);
         for (int a = k+1; a < n; a++) {
-            // printf("a=%d\n",a);
             if (b[k] != 0) {
                 if (b[k] == b[a]) {
-                    ans[2*k]++;
-                    ans[2*k+1] ==
-                    // printf("%daa\n",b[a]);
+                    s++;
                     b[a] = 0;
                 }
             }
         } 
         b[k] = 0;
     }
-    for (int x = 0; x < n; x++) {
-        if(ans[x] != 0) {
-            printf("%d",ans[x]);
-        }
-    }
+    return s;
 }
 int main(){
     int x = 5;
